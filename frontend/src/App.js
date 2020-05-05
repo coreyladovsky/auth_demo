@@ -6,25 +6,30 @@ import Home from './components/Home';
 import Users from './components/Users';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
+import AuthProvder from './providers/AuthProvider';
+import { AuthRoute, ProtectedRoute } from './util/auth_routes';
 
 function App() {
   return (
     <div className="App">
+    <AuthProvder>
+
      <NavBar />
      <Switch>
         <Route exact path="/" >
           <Home />
         </Route>
-        <Route path="/users" >
+        <ProtectedRoute path="/users" >
           <Users />
-        </Route>
-        <Route path="/signup" >
+        </ProtectedRoute>
+        <AuthRoute path="/signup" >
           <SignUp />
-        </Route>
-        <Route path="/login" >
+        </AuthRoute>
+        <AuthRoute path="/login" >
           <Login />
-        </Route>
+        </AuthRoute>
      </Switch>
+    </AuthProvder>
     </div>
   );
 }

@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { apiURL } from "../util/apiURL";
+import {login} from '../util/firebaseFunctons';
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
-  const API = apiURL();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // await axios.post(`${API}/api/users`, { id: res.user.uid, email });
+      await login(email, password);
       history.push("/");
-    } catch (err) {}
+    } catch (err) {
+      console.log("ERRR", err);
+    }
   };
 
   return (
@@ -30,6 +31,7 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
           value={password}
+          autoComplete="on"
         />
         <button type="submit">Login</button>
       </form>
