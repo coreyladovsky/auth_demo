@@ -14,9 +14,9 @@ const createUser = async (req, res, next) => {
   }
 };
 
-const fetchAllUsers = (req, res, next) => {
+const fetchAllUsers = async (req, res, next) => {
     try {
-        const users = db.any("SELECT * FROM users");
+        const users = await db.any("SELECT * FROM users");
         res.json({
             users,
             message: "All USERS"
