@@ -5,9 +5,9 @@ import { AuthContext } from '../providers/AuthProvider';
 import { logout } from '../util/firebaseFunctons';
 
 export default function NavBar(params) {
-    const { user } = useContext(AuthContext);
+    const { currentUser } = useContext(AuthContext);
     const display = () => {
-        if(user) {
+        if(currentUser) {
             return <button onClick={logout}>Log Out</button>;
         } else {
             return (
